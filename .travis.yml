@@ -1,0 +1,14 @@
+services:
+    - docker
+
+install:
+    - docker-compose up -d
+    - docker-compose exec python python --version
+    - docker-compose exec python python setup.py develop
+
+script:
+    - docker-compose exec python python -m unittest discover -s test -v
+    - docker-compose exec python python .
+
+after_script:
+    - docker-compose down
